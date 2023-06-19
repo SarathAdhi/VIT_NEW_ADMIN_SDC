@@ -1,3 +1,4 @@
+import { appStore } from "@utils/store";
 import { ErrorMessage, useField, useFormikContext } from "formik";
 import { useState } from "react";
 import Select from "react-select";
@@ -11,9 +12,10 @@ const ListInput = ({
   isMulti = false,
   onChange,
   required = false,
-  isDisabled = false
+  isDisabled = false,
 }) => {
   const [input, { value, initialValue }] = useField(name);
+  const { isAdmin } = appStore();
 
   const [selectedValue, setSelectedValue] = useState(
     input.value
@@ -50,7 +52,7 @@ const ListInput = ({
         <Select
           id={id}
           {...input}
-          isDisabled={isDisabled || isSubmitting  || (initialValue)}
+          isDisabled={!isAdmin && isDisabled && initialValue}
           menuPosition="fixed"
           className="block w-full text-left placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none sm:text-sm"
           styles={{

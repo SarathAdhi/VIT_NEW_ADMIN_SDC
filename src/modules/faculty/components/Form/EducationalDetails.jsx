@@ -27,11 +27,13 @@ export const EducationalDetails = ({
 }) => {
   const { isAdmin } = appStore();
 
-  console.log(isValueChanged);
-
   const [educationalDetailsCount, setEducationalDetailsCount] = useState(
     initialValues.educationalDetails.length || 1
   );
+
+  const _ed = Object.values(isValueChanged || []);
+
+  console.log({ _ed });
 
   return (
     <>
@@ -62,13 +64,9 @@ export const EducationalDetails = ({
               )}
             >
               {[...Array(educationalDetailsCount)].map((_, index) => {
-                const isDetailsFromDraft = isValueChanged
-                  ? Object?.values(isValueChanged).some(
-                      (e) => e === initialValues.educationalDetails[index]
-                    )
-                  : false;
-
-                console.log({ isDetailsFromDraft });
+                const isDetailsFromDraft = _ed?.some(
+                  (e) => e === initialValues.educationalDetails[index]
+                );
 
                 return (
                   <div
@@ -101,7 +99,7 @@ export const EducationalDetails = ({
                         className="w-full"
                         label="Degree"
                         name={`educationalDetails[${index}].degree`}
-                        disabled={!isDetailsFromDraft}
+                        isValueChanged={isDetailsFromDraft}
                         required
                       />
 
@@ -111,7 +109,7 @@ export const EducationalDetails = ({
                         maxLength={4}
                         label="Passed Out Year"
                         name={`educationalDetails[${index}].graduatedYear`}
-                        disabled={!isDetailsFromDraft}
+                        isValueChanged={isDetailsFromDraft}
                         required
                       />
 
@@ -119,7 +117,7 @@ export const EducationalDetails = ({
                         className="w-full"
                         label="Specialization"
                         name={`educationalDetails[${index}].specialization`}
-                        disabled={!isDetailsFromDraft}
+                        isValueChanged={isDetailsFromDraft}
                         required
                       />
 
@@ -127,7 +125,7 @@ export const EducationalDetails = ({
                         className="w-full"
                         label="Institute / University / College"
                         name={`educationalDetails[${index}].university`}
-                        disabled={!isDetailsFromDraft}
+                        isValueChanged={isDetailsFromDraft}
                         required
                       />
                     </Form.Grid4>

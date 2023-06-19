@@ -43,7 +43,6 @@ export const AddFacultyForm = ({
               specialization: res.researchDetails?.specialization?.join(","),
             },
           });
-
         })
         .finally(() => setIsLoading(false));
   }, []);
@@ -53,8 +52,6 @@ export const AddFacultyForm = ({
     : {};
 
   console.log({ updatedDifference });
-
-
 
   updatedDifference = {
     ...updatedDifference?.added,
@@ -132,6 +129,7 @@ export const AddFacultyForm = ({
             name="salutation"
             options={salutation}
             isValueChanged={updatedDifference["salutation"]}
+            isDisabled={isUpdate}
             required
           />
 
@@ -139,6 +137,7 @@ export const AddFacultyForm = ({
             label="Name"
             name="name"
             isValueChanged={updatedDifference["name"]}
+            disabled={isUpdate}
             required
           />
 
@@ -155,6 +154,7 @@ export const AddFacultyForm = ({
             name="designation"
             options={designation}
             isValueChanged={updatedDifference["designation"]}
+            isDisabled={isUpdate}
             required
           />
 
@@ -162,15 +162,9 @@ export const AddFacultyForm = ({
             label="School / Center"
             name="school"
             isValueChanged={updatedDifference["school"]}
+            disabled={isUpdate}
             required
           />
-
-          {/* <ListInput
-            options={department}
-            name="department"
-            label="Department"
-            required
-          /> */}
 
           {isAdmin && (
             <ListInput

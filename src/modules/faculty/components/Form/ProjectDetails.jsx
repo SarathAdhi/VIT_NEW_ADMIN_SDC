@@ -71,42 +71,55 @@ export const ProjectDetails = ({
               )}
             >
               {[...Array(onGoingConsultancyProjectDetailsCount)].map(
-                (_, index) => (
-                  <div
-                    key={"ongoingConsultancyProjectDetails" + index}
-                    className="w-full grid gap-2"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      {(index !== 0 || isUpdate) && (
-                        <button
-                          className="underline"
-                          onClick={() => {
-                            setOnGoingConsultancyProjectDetailsCount(
-                              (pre) => pre - 1
-                            );
-                            arrayHelpers.remove(index);
-                          }}
-                        >
-                          Remove
-                        </button>
-                      )}
+                (_, index) => {
+                  const isDetailsFromDraft = Object.values(
+                    updatedDifference["ongoingConsultancyProjectDetails"] || []
+                  )?.some((e) =>
+                    Object.keys(e || []).some(
+                      (x) =>
+                        initialValues.ongoingConsultancyProjectDetails[index][x]
+                    )
+                  );
+
+                  return (
+                    <div
+                      key={"ongoingConsultancyProjectDetails" + index}
+                      className="w-full grid gap-2"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        {(index !== 0 || isUpdate) && (
+                          <button
+                            className="underline"
+                            onClick={() => {
+                              setOnGoingConsultancyProjectDetailsCount(
+                                (pre) => pre - 1
+                              );
+                              arrayHelpers.remove(index);
+                            }}
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+
+                      <Form.Grid2>
+                        <Input
+                          className="w-full"
+                          label="Ongoing Title"
+                          name={`ongoingConsultancyProjectDetails[${index}].title`}
+                          isValueChanged={isDetailsFromDraft}
+                        />
+
+                        <Input
+                          className="w-full"
+                          label="Ongoing Funding Agency"
+                          name={`ongoingConsultancyProjectDetails[${index}].fundingAgency`}
+                          isValueChanged={isDetailsFromDraft}
+                        />
+                      </Form.Grid2>
                     </div>
-
-                    <Form.Grid2>
-                      <Input
-                        className="w-full"
-                        label="Ongoing Title"
-                        name={`ongoingConsultancyProjectDetails[${index}].title`}
-                      />
-
-                      <Input
-                        className="w-full"
-                        label="Ongoing Funding Agency"
-                        name={`ongoingConsultancyProjectDetails[${index}].fundingAgency`}
-                      />
-                    </Form.Grid2>
-                  </div>
-                )
+                  );
+                }
               )}
             </Form.Row>
           </div>
@@ -153,42 +166,58 @@ export const ProjectDetails = ({
               )}
             >
               {[...Array(completedConsultancyProjectDetailsCount)].map(
-                (_, index) => (
-                  <div
-                    key={"completedConsultancyProjectDetails" + index}
-                    className="w-full grid gap-2"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      {(index !== 0 || isUpdate) && (
-                        <button
-                          className="underline"
-                          onClick={() => {
-                            setCompletedConsultancyProjectDetailsCount(
-                              (pre) => pre - 1
-                            );
-                            arrayHelpers.remove(index);
-                          }}
-                        >
-                          Remove
-                        </button>
-                      )}
+                (_, index) => {
+                  const isDetailsFromDraft = Object.values(
+                    updatedDifference["completedConsultancyProjectDetails"] ||
+                      []
+                  )?.some((e) =>
+                    Object.keys(e || []).some(
+                      (x) =>
+                        initialValues.completedConsultancyProjectDetails[index][
+                          x
+                        ]
+                    )
+                  );
+
+                  return (
+                    <div
+                      key={"completedConsultancyProjectDetails" + index}
+                      className="w-full grid gap-2"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        {(index !== 0 || isUpdate) && (
+                          <button
+                            className="underline"
+                            onClick={() => {
+                              setCompletedConsultancyProjectDetailsCount(
+                                (pre) => pre - 1
+                              );
+                              arrayHelpers.remove(index);
+                            }}
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+
+                      <Form.Grid2>
+                        <Input
+                          className="w-full"
+                          label="Completed Title"
+                          name={`completedConsultancyProjectDetails[${index}].title`}
+                          isValueChanged={isDetailsFromDraft}
+                        />
+
+                        <Input
+                          className="w-full"
+                          label="Completed Funding Agency"
+                          name={`completedConsultancyProjectDetails[${index}].fundingAgency`}
+                          isValueChanged={isDetailsFromDraft}
+                        />
+                      </Form.Grid2>
                     </div>
-
-                    <Form.Grid2>
-                      <Input
-                        className="w-full"
-                        label="Completed Title"
-                        name={`completedConsultancyProjectDetails[${index}].title`}
-                      />
-
-                      <Input
-                        className="w-full"
-                        label="Completed Funding Agency"
-                        name={`completedConsultancyProjectDetails[${index}].fundingAgency`}
-                      />
-                    </Form.Grid2>
-                  </div>
-                )
+                  );
+                }
               )}
             </Form.Row>
           </div>
@@ -232,47 +261,61 @@ export const ProjectDetails = ({
                 ongoingFundedProjectDetailsCount === 1 && "!grid-cols-1"
               )}
             >
-              {[...Array(ongoingFundedProjectDetailsCount)].map((_, index) => (
-                <div
-                  key={"completedConsultancyProjectDetails" + index}
-                  className="w-full grid gap-2"
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    {(index !== 0 || isUpdate) && (
-                      <button
-                        className="underline"
-                        onClick={() => {
-                          if (isUpdate) {
-                            // deletePatentPublishedDetails(
-                            //   initialValues.patentPublishedDetails[index]
-                            //     ?.id
-                            // );
-                          }
+              {[...Array(ongoingFundedProjectDetailsCount)].map((_, index) => {
+                const isDetailsFromDraft = Object.values(
+                  updatedDifference["ongoingFundedProjectDetails"] || []
+                )?.some((e) =>
+                  Object.keys(e || []).some(
+                    (x) => initialValues.ongoingFundedProjectDetails[index][x]
+                  )
+                );
 
-                          setOngoingFundedProjectDetailsCount((pre) => pre - 1);
-                          arrayHelpers.remove(index);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    )}
+                return (
+                  <div
+                    key={"ongoingFundedProjectDetails" + index}
+                    className="w-full grid gap-2"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      {(index !== 0 || isUpdate) && (
+                        <button
+                          className="underline"
+                          onClick={() => {
+                            if (isUpdate) {
+                              // deletePatentPublishedDetails(
+                              //   initialValues.patentPublishedDetails[index]
+                              //     ?.id
+                              // );
+                            }
+
+                            setOngoingFundedProjectDetailsCount(
+                              (pre) => pre - 1
+                            );
+                            arrayHelpers.remove(index);
+                          }}
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+
+                    <Form.Grid2>
+                      <Input
+                        className="w-full"
+                        label="On going Title"
+                        name={`ongoingFundedProjectDetails[${index}].title`}
+                        isValueChanged={isDetailsFromDraft}
+                      />
+
+                      <Input
+                        className="w-full"
+                        label="On going Funding Agency"
+                        name={`ongoingFundedProjectDetails[${index}].fundingAgency`}
+                        isValueChanged={isDetailsFromDraft}
+                      />
+                    </Form.Grid2>
                   </div>
-
-                  <Form.Grid2>
-                    <Input
-                      className="w-full"
-                      label="On going Title"
-                      name={`ongoingFundedProjectDetails[${index}].title`}
-                    />
-
-                    <Input
-                      className="w-full"
-                      label="On going Funding Agency"
-                      name={`ongoingFundedProjectDetails[${index}].fundingAgency`}
-                    />
-                  </Form.Grid2>
-                </div>
-              ))}
+                );
+              })}
             </Form.Row>
           </div>
         )}
@@ -316,42 +359,55 @@ export const ProjectDetails = ({
               )}
             >
               {[...Array(completedFundedProjectDetailsCount)].map(
-                (_, index) => (
-                  <div
-                    key={"completedFundedProjectDetails" + index}
-                    className="w-full grid gap-2"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      {(index !== 0 || isUpdate) && (
-                        <button
-                          className="underline"
-                          onClick={() => {
-                            setCompletedFundedProjectDetailsCount(
-                              (pre) => pre - 1
-                            );
-                            arrayHelpers.remove(index);
-                          }}
-                        >
-                          Remove
-                        </button>
-                      )}
+                (_, index) => {
+                  const isDetailsFromDraft = Object.values(
+                    updatedDifference["completedFundedProjectDetails"] || []
+                  )?.some((e) =>
+                    Object.keys(e || []).some(
+                      (x) =>
+                        initialValues.completedFundedProjectDetails[index][x]
+                    )
+                  );
+
+                  return (
+                    <div
+                      key={"completedFundedProjectDetails" + index}
+                      className="w-full grid gap-2"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        {(index !== 0 || isUpdate) && (
+                          <button
+                            className="underline"
+                            onClick={() => {
+                              setCompletedFundedProjectDetailsCount(
+                                (pre) => pre - 1
+                              );
+                              arrayHelpers.remove(index);
+                            }}
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+
+                      <Form.Grid2>
+                        <Input
+                          className="w-full"
+                          label="Completed Title"
+                          name={`completedFundedProjectDetails[${index}].title`}
+                          isValueChanged={isDetailsFromDraft}
+                        />
+
+                        <Input
+                          className="w-full"
+                          label="Completed Funding Agency"
+                          name={`completedFundedProjectDetails[${index}].fundingAgency`}
+                          isValueChanged={isDetailsFromDraft}
+                        />
+                      </Form.Grid2>
                     </div>
-
-                    <Form.Grid2>
-                      <Input
-                        className="w-full"
-                        label="Completed Title"
-                        name={`completedFundedProjectDetails[${index}].title`}
-                      />
-
-                      <Input
-                        className="w-full"
-                        label="Completed Funding Agency"
-                        name={`completedFundedProjectDetails[${index}].fundingAgency`}
-                      />
-                    </Form.Grid2>
-                  </div>
-                )
+                  );
+                }
               )}
             </Form.Row>
           </div>

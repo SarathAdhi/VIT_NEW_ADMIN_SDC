@@ -70,48 +70,61 @@ export const AwardsAndCollaborations = ({
                 bookPublishedDetailsCount === 1 && "!grid-cols-1"
               )}
             >
-              {[...Array(bookPublishedDetailsCount)].map((_, index) => (
-                <div
-                  key={"bookPublishedDetails" + index}
-                  className="w-full grid gap-2"
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    {(index !== 0 || isUpdate) && (
-                      <button
-                        className="underline"
-                        onClick={() => {
-                          setBookPublishedDetailsCount((pre) => pre - 1);
-                          arrayHelpers.remove(index);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    )}
+              {[...Array(bookPublishedDetailsCount)].map((_, index) => {
+                const isDetailsFromDraft = Object.values(
+                  updatedDifference["bookPublishedDetails"] || []
+                )?.some((e) =>
+                  Object.keys(e || []).some(
+                    (x) => initialValues.bookPublishedDetails[index][x]
+                  )
+                );
+
+                return (
+                  <div
+                    key={"bookPublishedDetails" + index}
+                    className="w-full grid gap-2"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      {(index !== 0 || isUpdate) && (
+                        <button
+                          className="underline"
+                          onClick={() => {
+                            setBookPublishedDetailsCount((pre) => pre - 1);
+                            arrayHelpers.remove(index);
+                          }}
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+
+                    <Form.Grid3>
+                      <Input
+                        className="w-full"
+                        label="Title"
+                        name={`bookPublishedDetails[${index}].title`}
+                        isValueChanged={isDetailsFromDraft}
+                      />
+
+                      <Input
+                        className="w-full"
+                        label="Publisher"
+                        name={`bookPublishedDetails[${index}].publisher`}
+                        isValueChanged={isDetailsFromDraft}
+                      />
+
+                      <Input
+                        className="w-full"
+                        placeholder="Y Y Y Y"
+                        maxLength="4"
+                        label="Year"
+                        name={`bookPublishedDetails[${index}].year`}
+                        isValueChanged={isDetailsFromDraft}
+                      />
+                    </Form.Grid3>
                   </div>
-
-                  <Form.Grid3>
-                    <Input
-                      className="w-full"
-                      label="Title"
-                      name={`bookPublishedDetails[${index}].title`}
-                    />
-
-                    <Input
-                      className="w-full"
-                      label="Publisher"
-                      name={`bookPublishedDetails[${index}].publisher`}
-                    />
-
-                    <Input
-                      className="w-full"
-                      placeholder="Y Y Y Y"
-                      maxLength="4"
-                      label="Year"
-                      name={`bookPublishedDetails[${index}].year`}
-                    />
-                  </Form.Grid3>
-                </div>
-              ))}
+                );
+              })}
             </Form.Row>
           </div>
         )}
@@ -152,31 +165,45 @@ export const AwardsAndCollaborations = ({
                 awardDetailsCount === 1 && "!grid-cols-1"
               )}
             >
-              {[...Array(awardDetailsCount)].map((_, index) => (
-                <div key={"awardDetails" + index} className="w-full grid gap-2">
-                  <div className="flex items-center justify-between gap-2">
-                    {(index !== 0 || isUpdate) && (
-                      <button
-                        className="underline"
-                        onClick={() => {
-                          setAwardDetailsCount((pre) => pre - 1);
-                          arrayHelpers.remove(index);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    )}
-                  </div>
+              {[...Array(awardDetailsCount)].map((_, index) => {
+                const isDetailsFromDraft = Object.values(
+                  updatedDifference["awardDetails"] || []
+                )?.some((e) =>
+                  Object.keys(e || []).some(
+                    (x) => initialValues.awardDetails[index][x]
+                  )
+                );
 
-                  <Form.Grid2>
-                    <Input
-                      className="w-full"
-                      label="Awards & Recognition"
-                      name={`awardDetails[${index}]`}
-                    />
-                  </Form.Grid2>
-                </div>
-              ))}
+                return (
+                  <div
+                    key={"awardDetails" + index}
+                    className="w-full grid gap-2"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      {(index !== 0 || isUpdate) && (
+                        <button
+                          className="underline"
+                          onClick={() => {
+                            setAwardDetailsCount((pre) => pre - 1);
+                            arrayHelpers.remove(index);
+                          }}
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+
+                    <Form.Grid2>
+                      <Input
+                        className="w-full"
+                        label="Awards & Recognition"
+                        name={`awardDetails[${index}]`}
+                        isValueChanged={isDetailsFromDraft}
+                      />
+                    </Form.Grid2>
+                  </div>
+                );
+              })}
             </Form.Row>
           </div>
         )}
@@ -223,36 +250,52 @@ export const AwardsAndCollaborations = ({
               )}
             >
               {[...Array(majorInternationalCollaborationsDetailsCount)].map(
-                (_, index) => (
-                  <div
-                    key={"majorInternationalCollaborationsDetails" + index}
-                    className="w-full grid gap-2"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      {(index !== 0 || isUpdate) && (
-                        <button
-                          className="underline"
-                          onClick={() => {
-                            setMajorInternationalCollaborationsDetailsCount(
-                              (pre) => pre - 1
-                            );
-                            arrayHelpers.remove(index);
-                          }}
-                        >
-                          Remove
-                        </button>
-                      )}
-                    </div>
+                (_, index) => {
+                  const isDetailsFromDraft = Object.values(
+                    updatedDifference[
+                      "majorInternationalCollaborationsDetails"
+                    ] || []
+                  )?.some((e) =>
+                    Object.keys(e || []).some(
+                      (x) =>
+                        initialValues.majorInternationalCollaborationsDetails[
+                          index
+                        ][x]
+                    )
+                  );
 
-                    <Form.Grid2>
-                      <Input
-                        className="w-full"
-                        label="International Collaboration Details"
-                        name={`majorInternationalCollaborationsDetails[${index}]`}
-                      />
-                    </Form.Grid2>
-                  </div>
-                )
+                  return (
+                    <div
+                      key={"majorInternationalCollaborationsDetails" + index}
+                      className="w-full grid gap-2"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        {(index !== 0 || isUpdate) && (
+                          <button
+                            className="underline"
+                            onClick={() => {
+                              setMajorInternationalCollaborationsDetailsCount(
+                                (pre) => pre - 1
+                              );
+                              arrayHelpers.remove(index);
+                            }}
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+
+                      <Form.Grid2>
+                        <Input
+                          className="w-full"
+                          label="International Collaboration Details"
+                          name={`majorInternationalCollaborationsDetails[${index}]`}
+                          isValueChanged={isDetailsFromDraft}
+                        />
+                      </Form.Grid2>
+                    </div>
+                  );
+                }
               )}
             </Form.Row>
           </div>
@@ -299,36 +342,51 @@ export const AwardsAndCollaborations = ({
               )}
             >
               {[...Array(majorIndustryCollaborationsDetailsCount)].map(
-                (_, index) => (
-                  <div
-                    key={"majorIndustryCollaborationsDetails" + index}
-                    className="w-full grid gap-2"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      {(index !== 0 || isUpdate) && (
-                        <button
-                          className="underline"
-                          onClick={() => {
-                            setMajorIndustryCollaborationsDetailsCount(
-                              (pre) => pre - 1
-                            );
-                            arrayHelpers.remove(index);
-                          }}
-                        >
-                          Remove
-                        </button>
-                      )}
-                    </div>
+                (_, index) => {
+                  const isDetailsFromDraft = Object.values(
+                    updatedDifference["majorIndustryCollaborationsDetails"] ||
+                      []
+                  )?.some((e) =>
+                    Object.keys(e || []).some(
+                      (x) =>
+                        initialValues.majorIndustryCollaborationsDetails[index][
+                          x
+                        ]
+                    )
+                  );
 
-                    <Form.Grid2>
-                      <Input
-                        className="w-full"
-                        label="Industry Collaboration Details"
-                        name={`majorIndustryCollaborationsDetails[${index}]`}
-                      />
-                    </Form.Grid2>
-                  </div>
-                )
+                  return (
+                    <div
+                      key={"majorIndustryCollaborationsDetails" + index}
+                      className="w-full grid gap-2"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        {(index !== 0 || isUpdate) && (
+                          <button
+                            className="underline"
+                            onClick={() => {
+                              setMajorIndustryCollaborationsDetailsCount(
+                                (pre) => pre - 1
+                              );
+                              arrayHelpers.remove(index);
+                            }}
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+
+                      <Form.Grid2>
+                        <Input
+                          className="w-full"
+                          label="Industry Collaboration Details"
+                          name={`majorIndustryCollaborationsDetails[${index}]`}
+                          isValueChanged={isDetailsFromDraft}
+                        />
+                      </Form.Grid2>
+                    </div>
+                  );
+                }
               )}
             </Form.Row>
           </div>
