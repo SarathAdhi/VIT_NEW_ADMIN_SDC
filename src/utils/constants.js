@@ -1,0 +1,50 @@
+export const DEPARTMENT = [
+  "Software Systems",
+  "Computational Intelligence",
+  "Database Systems",
+  "Information Security",
+  "Analytics",
+  "IoT",
+];
+
+export const FACULTYROLE = ["FACULTY", "ADMIN"];
+
+export const SALUTATION = ["Mr.", "Ms.", "Dr.", "Prof."];
+
+export const DESIGNATION = [
+  "Professor Grade 1",
+  "Professor Grade 2",
+  "Professor Higher Academic Grade",
+  "Professor Level PG1",
+  "Senior Professor",
+  "Vice Chancellor",
+  "Visiting Professor",
+  "Higher Academic Grade",
+  "HOD",
+  "Pro Vice Chancellor",
+  "Professor",
+  "Professor Emeritus",
+  "Associate Professor Grade 1",
+  "Associate Professor Grade 2",
+  "Associate Professor Senior",
+  "Dean",
+  "Design Chair",
+  "Director",
+  "Associate Manager",
+  "Associate Professor",
+  "Assistant Professor (Junior)",
+  "Assistant Professor (Selection Grade)",
+  "Assistant Professor (Senior)",
+  "Assistant Professor Grade 1",
+  "Assistant Professor Grade 2",
+  "Assistant Professor Senior Grade 1",
+  "Assistant Professor Senior Grade 2",
+  "Associate Dean",
+  "Associate Expert",
+  "Associate Professor",
+  "Adjunct Expert",
+  "Adjunct Faculty",
+  "Adjunct Professor",
+  "Assistant Dean",
+  "Assistant Director",
+];
